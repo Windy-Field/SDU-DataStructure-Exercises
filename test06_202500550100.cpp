@@ -70,6 +70,26 @@ int nodeCounts(const BiTreeNode *root) {
     return 1 + nodeCounts(root->left) + nodeCounts(root->right);
 }
 
+int maxHeightDifference(const BiTreeNode *root) {
+    if (root == nullptr) {
+        return 0;
+    }
+    int result = 0;
+    if (result < treeHeight(root->left) - treeHeight(root->right)) {
+        result = treeHeight(root->left) - treeHeight(root->right);
+    }
+
+    int leftResult = maxHeightDifference(root->left);
+    int rightResult = maxHeightDifference(root->right);
+    if (result < leftResult) {
+        result = leftResult;
+    }
+    if (result < rightResult) {
+        result = rightResult;
+    }
+    return result;
+}
+
 void printPreOrder(const BiTreeNode *root, bool &isFirst) {
     if (root == nullptr) {
         return;
